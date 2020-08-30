@@ -702,7 +702,7 @@ function mkinitcpio() {
 function network() {
     print_step "network()"
 
-    pacman_install "networkmanager"
+    pacman_install "linux-firmware networkmanager"
     arch-chroot /mnt systemctl enable NetworkManager.service
 }
 
