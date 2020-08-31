@@ -557,6 +557,7 @@ function install() {
     rm blackarch-keyring.pkg.tar.xz.sig
     pacman-key --init
     pacman --config /dev/null --noconfirm -U blackarch-keyring.pkg.tar.xz
+    pacman-key --populate
     curl -s https://raw.githubusercontent.com/res-dk/alis/master/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist
     curl -s https://raw.githubusercontent.com/res-dk/alis/master/blackarch-mirrorlist -o /mnt/etc/pacman.d/blackarch-mirrorlist
     echo "[blackarch]" >> /etc/pacman.conf
