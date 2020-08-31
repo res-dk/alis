@@ -691,6 +691,7 @@ function kernels() {
     if [ -n "$KERNELS" ]; then
         pacman_install "$KERNELS"
     fi
+    pacman_install "linux-firmware"
 }
 
 function mkinitcpio() {
@@ -702,7 +703,7 @@ function mkinitcpio() {
 function network() {
     print_step "network()"
 
-    pacman_install "linux-firmware networkmanager"
+    pacman_install "networkmanager"
     arch-chroot /mnt systemctl enable NetworkManager.service
 }
 
