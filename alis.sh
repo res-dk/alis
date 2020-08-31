@@ -558,7 +558,7 @@ function install() {
     pacman-key --init
     pacman --config /dev/null --noconfirm -U blackarch-keyring.pkg.tar.xz
     curl -s https://blackarch.org/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist
-    echo "Include = /etc/pacman.d/blackarch-mirrorlist" >> /etc/pacman.d
+    echo "Include = /etc/pacman.d/blackarch-mirrorlist" >> /etc/pacman.conf
 
 }
 
