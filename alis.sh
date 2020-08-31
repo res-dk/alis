@@ -551,14 +551,13 @@ function install() {
     sed -i 's/#Color/Color/' /mnt/etc/pacman.conf
     sed -i 's/#TotalDownload/TotalDownload/' /mnt/etc/pacman.conf
 
-    curl -s -O 'https://www.blackarch.org/keyring/blackarch-keyring.pkg.tar.xz{,.sig}'
-    gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 4345771566D76038C7FEB43863EC0ADBEA87E4E3 > /dev/null 2>&1
-    gpg --keyserver-options no-auto-key-retrieve --with-fingerprint blackarch-keyring.pkg.tar.xz.sig > /dev/null 2>&1
-    rm blackarch-keyring.pkg.tar.xz.sig
-    pacman-key --init
-    pacman --config /dev/null --noconfirm -U blackarch-keyring.pkg.tar.xz
-    pacman-key --init
-    pacman-key --populate blackarch
+    arch-chroot /mnt curl -s -O 'https://www.blackarch.org/keyring/blackarch-keyring.pkg.tar.xz{,.sig}'
+    arch-chroot /mnt gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 4345771566D76038C7FEB43863EC0ADBEA87E4E3 > /dev/null 2>&1
+    arch-chroot /mnt gpg --keyserver-options no-auto-key-retrieve --with-fingerprint blackarch-keyring.pkg.tar.xz.sig > /dev/null 2>&1
+    arch-chroot /mnt rm blackarch-keyring.pkg.tar.xz.sig
+    arch-chroot /mnt pacman-key --init
+    arch-chroot /mnt pacman --config /dev/null --noconfirm -U blackarch-keyring.pkg.tar.xz
+    arch-chroot /mnt pacman-key --populate blackarch
     curl -s https://raw.githubusercontent.com/res-dk/alis/master/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist
     curl -s https://raw.githubusercontent.com/res-dk/alis/master/blackarch-mirrorlist -o /mnt/etc/pacman.d/blackarch-mirrorlist
     echo "[blackarch]" >> /etc/pacman.conf
