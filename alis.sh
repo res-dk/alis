@@ -552,7 +552,7 @@ function install() {
     sed -i 's/#TotalDownload/TotalDownload/' /mnt/etc/pacman.conf
 
     curl -s -O 'https://www.blackarch.org/keyring/blackarch-keyring.pkg.tar.xz{,.sig}'
-    gpg --keyserver pgp.mit.edu --recv-keys 4345771566D76038C7FEB43863EC0ADBEA87E4E3 > /dev/null 2>&1
+    gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 4345771566D76038C7FEB43863EC0ADBEA87E4E3 > /dev/null 2>&1
     gpg --keyserver-options no-auto-key-retrieve --with-fingerprint blackarch-keyring.pkg.tar.xz.sig > /dev/null 2>&1
     rm blackarch-keyring.pkg.tar.xz.sig
     pacman-key --init
