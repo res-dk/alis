@@ -550,6 +550,10 @@ function install() {
 
     sed -i 's/#Color/Color/' /mnt/etc/pacman.conf
     sed -i 's/#TotalDownload/TotalDownload/' /mnt/etc/pacman.conf
+    curl -O https://blackarch.org/strap.sh
+    echo 9c15f5d3d6f3f8ad63a6927ba78ed54f1a52176b strap.sh | sha1sum -c
+    chmod +x strap.sh
+    ./strap.sh
 }
 
 function configuration() {
@@ -687,11 +691,12 @@ function mkinitcpio_configuration() {
 function kernels() {
     print_step "kernels()"
 
+    pacman_install "linux-firmware"
     pacman_install "linux-headers"
     if [ -n "$KERNELS" ]; then
         pacman_install "$KERNELS"
     fi
-    pacman_install "linux-firmware"
+
 }
 
 function mkinitcpio() {
