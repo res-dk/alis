@@ -15,7 +15,7 @@ rm -f alis-recovery.sh
 rm -f alis-recovery-asciinema.sh
 rm -f alis-recovery-reboot.sh
 
-curl -O https://raw.githubusercontent.com/res-k/alis/master/alis.conf
+curl -O https://raw.githubusercontent.com/res-dk/alis/master/alis.conf
 curl -O https://raw.githubusercontent.com/res-dk/alis/master/alis.sh
 curl -O https://raw.githubusercontent.com/res-dk/alis/master/alis-asciinema.sh
 curl -O https://raw.githubusercontent.com/res-dk/alis/master/alis-reboot.sh
