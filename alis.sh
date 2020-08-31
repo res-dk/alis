@@ -550,10 +550,19 @@ function install() {
 
     sed -i 's/#Color/Color/' /mnt/etc/pacman.conf
     sed -i 's/#TotalDownload/TotalDownload/' /mnt/etc/pacman.conf
-    curl -O https://blackarch.org/strap.sh
-    echo 9c15f5d3d6f3f8ad63a6927ba78ed54f1a52176b strap.sh | sha1sum -c
-    chmod +x strap.sh
-    ./strap.sh
+
+    curl -s -O 'https://www.blackarch.org/keyring/blackarch-keyring.pkg.tar.xz{,.sig}'
+    gpg --keyserver pgp.mit.edu --recv-keys 4345771566D76038C7FEB43863EC0ADBEA87E4E3 > /dev/null 2>&1
+    gpg --keyserver-options no-auto-key-retrieve --with-fingerprint blackarch-keyring.pkg.tar.xz.sig > /dev/null 2>&1
+    rm blackarch-keyring.pkg.tar.xz.sig
+    pacman-key --init
+    pacman --config /dev/null --noconfirm -U blackarch-keyring.pkg.tar.xz
+    curl -s https://blackarch.org/blackarch-mirrorlist -o /etc/pacman.d/blackarch-mirrorlist
+    cat >> "/etc/pacman.conf" << EOF
+[blackarch]
+Include = /etc/pacman.d/blackarch-mirrorlist
+EOF 
+
 }
 
 function configuration() {
